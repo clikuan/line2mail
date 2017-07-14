@@ -1,0 +1,6 @@
+{
+	"dependencies": {
+		"@line/bot-sdk": "latest",
+		"sendmail": "latest"
+	}
+}
