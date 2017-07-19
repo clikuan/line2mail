@@ -30,7 +30,8 @@ https.createServer(options, function(req, res){
 							console.dir(reply);
 					});
 				}
-				else if(receiveObj.events[0].message.type == 'image' || receiveObj.events[0].message.type == 'file'){
+				else if(receiveObj.events[0].message.type == 'image' || receiveObj.events[0].message.type == 'file' ||
+						receiveObj.events[0].message.type == 'video' || receiveObj.events[0].message.type == 'audio'){
 					var stream = client.getMessageContent(receiveObj.events[0].message.id);
 					var file = null;
 					stream.on('data', function(data){
@@ -42,8 +43,15 @@ https.createServer(options, function(req, res){
 					});
 					stream.on('end', function(){
 						var filename;
+						console.log(receiveObj.events[0].message.type);
 						if(receiveObj.events[0].message.type == 'image'){
 							filename = 'image.jpg';
+						}
+						else if(receiveObj.events[0].message.type == 'video'){
+							filename = 'video.mp4'
+						}
+						else if(receiveObj.events[0].message.type == 'audio'){
+							filename = 'audio.mp3'
 						}
 						else{
 							filename = receiveObj.events[0].message.fileName;
